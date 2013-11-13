@@ -140,8 +140,8 @@ def importCodeList(police):
 	
 	return code_list
 	
-def writeDb(code_list, police, ifile):
-	print("writing file "+db_root+"...")
+def writeJsDb(code_list, police, ifile):
+	print("writing file "+db_root+"."+output_language+"...")
 	i=0
 	while i < len(code_list):
 		length = len(code_list[i][0][0][0])
@@ -169,6 +169,32 @@ def writeDb(code_list, police, ifile):
 			j+=1
 		i+=1
 
-
-
+def writePhpDb(code_list, police, ifile):
+	print("writing file "+db_root+"."+output_language+"...")
+	i=0
+	while i < len(code_list):
+		length = len(code_list[i][0][0][0])
+		j=0
+		while j < len(code_list[i]):
+			fletters = firstLetters(code_list[i][j][0][0],2)
+			ifile.write("function gwc_"+police+"_"+str(length)+"_"+fletters+"($code){switch($code){"+"\n")
+			
+			k=0
+			while k < len(code_list[i][j]):
+				code = code_list[i][j][k][0]
+				ifile.write("case'"+code+"':return array(")
+				
+				l=1
+				while l < len(code_list[i][j][k]):
+					if l!=1:
+						ifile.write(",")
+					ifile.write("array('"+code_list[i][j][k][l][0]+"',"+str(code_list[i][j][k][l][1])+")")
+					l+=1
+				
+				ifile.write(");"+"\n")
+				k+=1
+			
+			ifile.write("}}"+"\n")
+			j+=1
+		i+=1
 
