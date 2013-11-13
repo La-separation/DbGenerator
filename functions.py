@@ -3,6 +3,18 @@
 
 from var import *
 
+def recursiveRmdir(idir):
+	""" remove a directory and its content """
+	import os
+	
+	ilist = os.listdir(idir)
+	for elt in ilist:
+		if os.path.isdir(idir+"/"+elt)==True:
+			recursiveRmdir(idir+"/"+elt)
+		else:
+			os.remove(idir+"/"+elt)
+	os.rmdir(idir)
+
 def firstLetters(istr, lim=2):
 	""" return the two first letters of a string """
 	i=0
@@ -82,7 +94,6 @@ def generateCodeList(lines, police):
 		
 		code_list = addToCodeList(elt, code_list, police)
 		
-	code_list.sort()
 	return code_list
 	
 def addToCodeList(elt, code_list, police): # elt = [word, freq]
@@ -172,14 +183,19 @@ def writeJsDb(code_list, police, ifile):
 			j+=1
 		i+=1
 
-def writePhpDb(code_list, police, ifile):
-	print("writing file "+db_root+"."+output_language+"...")
+def writePhpDb(code_list, police):
+	import os
+	
+	print("writing PHP database...")
 	i=0
 	while i < len(code_list):
 		length = len(code_list[i][0][0][0])
+		os.mkdir(db_root+"/"+police+"/"+str(length))
 		j=0
 		while j < len(code_list[i]):
 			fletters = firstLetters(code_list[i][j][0][0],2)
+			ifile = open(db_root+"/"+police+"/"+str(length)+"/"+fletters+".php", "w")
+			ifile.write("<?php"+"\n")
 			ifile.write("function gwc_"+police+"_"+str(length)+"_"+fletters+"($code){switch($code){"+"\n")
 			
 			k=0
@@ -198,6 +214,9 @@ def writePhpDb(code_list, police, ifile):
 				k+=1
 			
 			ifile.write("}}"+"\n")
+			ifile.write("?>")
+			ifile.close()
+			
 			j+=1
 		i+=1
 
