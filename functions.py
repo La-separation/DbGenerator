@@ -55,8 +55,11 @@ def readDicFile():
 	while i < len(lines) and lines[i]!="":
 		lines[i] = lines[i].lower()
 		lines[i] = lines[i].replace("\n","")
-		lines[i] = lines[i].split(";")
-		lines[i][1] = lines[i][1].replace(",",".")
+		#~ lines[i] = lines[i].split(";")
+		#~ lines[i][1] = lines[i][1].replace(",",".")
+		#~ if len(lines[i]) > 10:
+			#~ del(lines[i])
+			#~ i-=1
 		i+=1
 		
 	return lines
@@ -67,14 +70,14 @@ def generateCodeList(lines, police):
 	code_list structure:
 		[[# code length
 			[# code's two first letters
-				[code, [word, freq], [word, freq]...]...
+				[code, word, word, ...]...
 			]...
 		]...]
 	"""
 	code_list=[]
 	a=1
-	for elt in lines: # elt = [word, freq]
-		print(str(a)+" : "+elt[0])
+	for elt in lines: # elt = word
+		print(str(a)+" : "+elt)
 		a+=1
 		
 		code_list = addToCodeList(elt, code_list, police)
@@ -83,8 +86,8 @@ def generateCodeList(lines, police):
 	return code_list
 	
 def addToCodeList(elt, code_list, police): # elt = [word, freq]
-	"""add a couple [word, freq] to code_list"""
-	elt_codes = wordCode(elt[0], police)
+	"""add a word to code_list"""
+	elt_codes = wordCode(elt, police)
 	for code in elt_codes:
 		added = False
 		if len(code_list)!=0:
@@ -97,10 +100,10 @@ def addToCodeList(elt, code_list, police): # elt = [word, freq]
 						if firstLetters(code, 2) == firstLetters(code_list[i][j][0][0], 2):
 							k=0
 							while k < len(code_list[i][j]) and added == False:
-								if code == code_list[i][j][k][0]: # et si le mot n'existe pas deja
+								if code == code_list[i][j][k][0]:
 									l=1
 									while l < len(code_list[i][j][k]) and added == False:
-										if code_list[i][j][k][l][0] == elt[0]:
+										if code_list[i][j][k][l] == elt:
 											added = True
 										l+=1
 									if added == False:
@@ -159,7 +162,7 @@ def writeJsDb(code_list, police, ifile):
 				while l < len(code_list[i][j][k]):
 					if l!=1:
 						ifile.write(",")
-					ifile.write("['"+code_list[i][j][k][l][0]+"',"+str(code_list[i][j][k][l][1])+"]")
+					ifile.write("'"+code_list[i][j][k][l]+"'")
 					l+=1
 				
 				ifile.write("];"+"\n")
@@ -188,7 +191,7 @@ def writePhpDb(code_list, police, ifile):
 				while l < len(code_list[i][j][k]):
 					if l!=1:
 						ifile.write(",")
-					ifile.write("array('"+code_list[i][j][k][l][0]+"',"+str(code_list[i][j][k][l][1])+")")
+					ifile.write("'"+code_list[i][j][k][l]+"'")
 					l+=1
 				
 				ifile.write(");"+"\n")

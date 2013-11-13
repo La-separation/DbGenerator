@@ -34,7 +34,7 @@ for police in police_list:
 	
 	a=1
 	for elt in lines: # elt = [word, freq]
-		print(str(a)+" : "+elt[0])
+		print(str(a)+" : "+elt)
 		a+=1
 		
 		code_list = addToCodeList(elt, code_list, police)
