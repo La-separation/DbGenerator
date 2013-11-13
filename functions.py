@@ -29,10 +29,7 @@ def wordCode(word, police):
 	word_codes = [""]
 	i=0
 	
-	# maj or min ?
 	ascii = ord("a")
-	if police == police_list[0] or police == police_list[2]:
-		ascii = ord("a")
 		
 	while i < len(word):
 		if police == police_list[0]:
@@ -55,6 +52,12 @@ def wordCode(word, police):
 				k+=1
 			j+=1
 		i+=1
+	
+	if police == police_list[0] or police == police_list[3]:
+		i=0
+		while i < len(word_codes):
+			word_codes[i] = word_codes[i].lower()
+			i+=1
 	
 	return word_codes
 
