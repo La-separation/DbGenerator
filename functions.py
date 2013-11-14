@@ -33,9 +33,9 @@ def wordCode(word, police):
 		
 	while i < len(word):
 		if police == police_list[0]:
-			ilist = code_coupable_haut_maj[ord(word[i]) - ascii]
-		elif police == police_list[1]:
 			ilist = code_coupable_haut_min[ord(word[i]) - ascii]
+		elif police == police_list[1]:
+			ilist = code_coupable_haut_maj[ord(word[i]) - ascii]
 		elif police == police_list[2]:
 			ilist = code_coupable_bas_maj[ord(word[i]) - ascii]
 		elif police == police_list[3]:
@@ -52,12 +52,6 @@ def wordCode(word, police):
 				k+=1
 			j+=1
 		i+=1
-	
-	if police == police_list[0] or police == police_list[3]:
-		i=0
-		while i < len(word_codes):
-			word_codes[i] = word_codes[i].lower()
-			i+=1
 	
 	return word_codes
 
@@ -216,6 +210,7 @@ def writePhpDb(code_list, police):
 				ifile.write(");"+"\n")
 				k+=1
 			
+			ifile.write("default: return array();")
 			ifile.write("}}"+"\n")
 			ifile.write("?>")
 			ifile.close()
