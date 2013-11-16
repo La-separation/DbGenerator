@@ -32,7 +32,7 @@ if output_language == "js":
 elif output_language == "php":
 	if os.path.exists(db_root) == True and os.path.isdir(db_root) == True:
 		recursiveRmdir(db_root)
-	os.mkdir(db_root)
+	os.makedirs(db_root)
 	
 	for police in police_list:
 		os.mkdir(db_root+"/"+police)

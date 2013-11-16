@@ -218,3 +218,4 @@ def writePhpDb(code_list, police):
 			j+=1
 		i+=1
 
+print(wordCode("neige", "coupable_haut_min"))
