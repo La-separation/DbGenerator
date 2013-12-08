@@ -11,8 +11,8 @@ code_coupable_haut_maj = [["A"],["A"],["A","C"],["A"],["A","C"],["C"],["A","C"],
 
 code_centrale = [["A"],["B"],["B"],["B"],["B"],["F"],["B"],["H"],["I"],["J"],["H"],["L"],["M"],["A"],["B"],["P"],["Q"],["A"],["B"],["T"],["U"],["V"],["W"],["H"],["Y"],["Z"]]
 
-output_language = "php" # "js" or "php"
-word_list = "input/en_word_list"
-db_root = "output/local_db/en"
+output_language = "js" # "js" or "php"
+word_list = "input/fr_word_list"
+db_root = "output/local_db"
 code_list_file = "output/code_list"
 police_list = ["coupable_haut_min","coupable_haut_maj","coupable_bas_maj","coupable_bas_min","centrale"]

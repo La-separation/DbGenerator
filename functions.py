@@ -15,7 +15,7 @@ def recursiveRmdir(idir):
 			os.remove(idir+"/"+elt)
 	os.rmdir(idir)
 
-def firstLetters(istr, lim=2):
+def firstLetters(istr, lim=1):
 	""" return the two first letters of a string """
 	i=0
 	first_letters=""
@@ -105,7 +105,7 @@ def addToCodeList(elt, code_list, police): # elt = [word, freq]
 				if len(code_list[i][0][0][0]) == len(code):
 					j = 0
 					while j < len(code_list[i]) and added == False:
-						if firstLetters(code, 2) == firstLetters(code_list[i][j][0][0], 2):
+						if firstLetters(code) == firstLetters(code_list[i][j][0][0]):
 							k=0
 							while k < len(code_list[i][j]) and added == False:
 								if code == code_list[i][j][k][0]:
@@ -136,6 +136,7 @@ def addToCodeList(elt, code_list, police): # elt = [word, freq]
 	return code_list
 
 def saveCodeList(code_list, police):
+	"""save code_list var in files with pickle"""
 	import pickle
 	
 	ifile = open(code_list_file+"_"+police,"wb")
@@ -143,6 +144,7 @@ def saveCodeList(code_list, police):
 	ifile.close()
 	
 def importCodeList(police):
+	"""import code_list var from files with pickle"""
 	import pickle
 	
 	ifile = open(code_list_file+"_"+police, "rb")
@@ -152,13 +154,14 @@ def importCodeList(police):
 	return code_list
 	
 def writeJsDb(code_list, police, ifile):
+	"""write the JS database --> one unique file"""
 	print("writing file "+db_root+"."+output_language+"...")
 	i=0
 	while i < len(code_list):
 		length = len(code_list[i][0][0][0])
 		j=0
 		while j < len(code_list[i]):
-			fletters = firstLetters(code_list[i][j][0][0],2)
+			fletters = firstLetters(code_list[i][j][0][0])
 			ifile.write("gwc_"+police+"_"+str(length)+"_"+fletters+"=function(code){switch(code){"+"\n")
 			
 			k=0
@@ -181,6 +184,7 @@ def writeJsDb(code_list, police, ifile):
 		i+=1
 
 def writePhpDb(code_list, police):
+	"""write the PHP database --> multiple files in a dir strucutre"""
 	import os
 	
 	print("writing PHP database...")
@@ -190,7 +194,7 @@ def writePhpDb(code_list, police):
 		os.mkdir(db_root+"/"+police+"/"+str(length))
 		j=0
 		while j < len(code_list[i]):
-			fletters = firstLetters(code_list[i][j][0][0],2)
+			fletters = firstLetters(code_list[i][j][0][0])
 			ifile = open(db_root+"/"+police+"/"+str(length)+"/"+fletters+".php", "w")
 			ifile.write("<?php"+"\n")
 			ifile.write("function gwc_"+police+"_"+str(length)+"_"+fletters+"($code){switch($code){"+"\n")
@@ -217,5 +221,3 @@ def writePhpDb(code_list, police):
 			
 			j+=1
 		i+=1
-
-print(wordCode("neige", "coupable_haut_min"))
