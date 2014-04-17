@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*-
 
 ## import ##
-from global_var import *
-from word_code import word_code
-from utilities import first_letters
-from DbGenerator import police_code_list
+
 
 ## var ##
 
@@ -22,6 +19,10 @@ def add_to_code_list(police_code_list, word, code_list):
 			}...
 		}
 	"""
+	
+	from global_var import police_list
+	from word_code import word_code
+	from utilities import first_letters
 	
 	for police in police_list:
 		if code_list.get(police) == None:

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 ## import ##
-from global_var import *
+import os
 
 ## var ##
 
@@ -10,11 +10,14 @@ from global_var import *
 ## def ##
 def import_police_code_list():
 	"""retrieve police_code_list from the files in res/police_code"""
+	
+	from global_var import police_list, police_list_dir
+	
 	global police_list
 	police_code_list = []
 	
 	for elt in police_list:
-		ifile = open("res/police_code/code_"+elt+".txt", "r")
+		ifile = open(os.path.join(police_list_dir,"code_"+elt+".txt"), "r")
 		lines = ifile.read().split("\n")
 		
 		i = 0
@@ -37,6 +40,9 @@ def import_police_code_list():
 	
 def word_code(word, police, police_code_list):
 	"""generate all possible codes of a word in a police based on police_code_list"""
+	
+	from global_var import police_list
+	
 	word_codes = [""]
 	police_nb = police_list.index(police)
 	

@@ -1,0 +1,6 @@
+output
+*.geany
+*.pyc
+*__pycache__
+build
+*~

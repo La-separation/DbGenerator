@@ -10,6 +10,7 @@ import os
 ## def ##
 def write_js_db(code_list, out_dir):
 	"""write the JS database --> one unique file"""
+	
 	from global_var import js_db
 	
 	ifile = open(os.path.join(out_dir,js_db), "w")
@@ -33,6 +34,7 @@ def write_js_db(code_list, out_dir):
 
 def write_php_db(code_list, out_dir):
 	"""write the PHP database --> multiple files in a dir strucutre"""
+	
 	from global_var import php_db
 	from utilities import recursive_rmdir
 	

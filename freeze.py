@@ -18,16 +18,18 @@ executables = [
 
 buildOptions = dict(
 	compressed = False,
-	includes = ["gi", "global_var", "utilities", "word_code", "word_list", "code_list", "write_db"],
-	packages = ["gi", "global_var", "utilities", "word_code", "word_list", "code_list", "write_db"]
+	#includes = ["gi", "global_var", "utilities", "word_code", "word_list", "code_list", "write_db"],
+	packages = ["gi", "global_var", "utilities", "word_code", "word_list", "code_list", "write_db"],
+	include_files = ["res", "gui.glade"],
+	include_msvcr = True
 )
 
 setup(
-	name = "cx_freeze executable",
+	name = "DbGenerator",
 	version = "1.0",
-	description = "python3 + GTK3",
+	description = "",
 	options = dict(build_exe = buildOptions),
 	executables = executables
 )
 
-# build with "python3 freeze.py build" or "./freeze.py build"
+# build with "pythonX freeze.py build" or "./freeze.py build"
