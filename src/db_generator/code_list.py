@@ -47,3 +47,25 @@ def add_to_code_list(police_code_list, word, code_list):
 							code_list[police][length][fl][code].append(word)
 		
 	return code_list
+	
+def save_code_list(code_list, out_dir):
+	"""save code list in a .pickle file"""
+	
+	import os
+	import pickle
+	from global_var import saved_db
+	
+	ifile = open(os.path.join(out_dir,saved_db),"wb")
+	pickle.dump(code_list, ifile)
+	ifile.close()
+	
+def import_code_list(ipath):
+	"""import code_list from a previously saved .pickle"""
+	
+	import os
+	import pickle
+	
+	ifile = open(ipath, "rb")
+	code_list = pickle.load(ifile)
+	ifile.close()
+	return code_list

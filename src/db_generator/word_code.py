@@ -8,26 +8,39 @@ import os
 
 
 ## def ##
+def import_police_list():
+	"""import police_list from the names of files present in res/police_code"""
+	
+	from global_var import police_list_dir
+	
+	police_list=[]
+	for elt in os.listdir(police_list_dir):
+		name, ext = os.path.splitext(elt)
+		if ext == ".txt":
+			police_list.append(name)
+	return police_list
+
 def import_police_code_list():
 	"""retrieve police_code_list from the files in res/police_code"""
 	
 	from global_var import police_list, police_list_dir
 	
-	global police_list
+	#global police_list
 	police_code_list = []
 	
 	for elt in police_list:
-		ifile = open(os.path.join(police_list_dir,"code_"+elt+".txt"), "r")
+		ifile = open(os.path.join(police_list_dir, elt+".txt"), "r")
 		lines = ifile.read().split("\n")
 		
 		i = 0
 		while i < len(lines):
 			if lines[i] != "":
 				lines[i] = lines[i].split(":")
-				temp = lines[i][1].split(",")
-				del(lines[i][1])
-				for elt1 in temp:
-					lines[i].append(elt1)
+				if len(lines[i])>1:
+					temp = lines[i][1].split(",")
+					del(lines[i][1])
+					for elt1 in temp:
+						lines[i].append(elt1)
 				i+=1
 			else:
 				del(lines[i])
@@ -50,6 +63,7 @@ def word_code(word, police, police_code_list):
 		
 		i=0
 		found = False
+		letter_codes=[]
 		while i < len(police_code_list[police_nb]) and found == False:
 			if police_code_list[police_nb][i][0] == letter:
 				letter_codes = police_code_list[police_nb][i]
