@@ -122,7 +122,7 @@ if __name__ == "__main__":
 	word_list_button = builder.get_object("word_list_button")
 	word_list_button.set_filename(os.path.join(word_list_dir,"fr_word_list.txt"))
 	out_dir_button = builder.get_object("out_dir_button")
-	out_dir_button.set_filename(out_dir)
+	#out_dir_button.set_filename(out_dir)
 	launch_button = builder.get_object("launch_button")
 	stop_button = builder.get_object("stop_button")
 	saved_db_button = builder.get_object("saved_db_button")
