@@ -27,7 +27,12 @@ from src.db_generator.write_db import *
 stop=False
 
 ## def ##
-def ftp_send_php_db(sender):
+def ftp_thread(sender):
+	import threading
+	thread=threading.Thread(target=ftp_send_php_db)
+	thread.start()
+
+def ftp_send_php_db():
 	server=server_entry.get_text()
 	user=user_entry.get_text()
 	passwd=passwd_entry.get_text()
@@ -49,8 +54,10 @@ def ftp_send_php_db(sender):
 	for elt in os.listdir(db):
 		ftp_send(db+"/"+elt, ftp_link)
 	ftp_link.quit()
+	print("done")
 		
 def ftp_remove(path, ftp_link):
+	Gtk.main_iteration_do(False)
 	print("removing : "+path)
 	try:
 		ftp_link.delete(path)
@@ -63,6 +70,7 @@ def ftp_remove(path, ftp_link):
 		ftp_link.rmd(path)
 	
 def ftp_send(path, ftp_link):
+	Gtk.main_iteration_do(False)
 	print("sending : "+path)
 	if os.path.isfile(path):
 		ftp_link.storbinary("STOR "+path.split("/")[-1], open(path, "rb"))
@@ -262,7 +270,7 @@ if __name__ == "__main__":
 		"save_button_file_dialog_chooser_clicked" : save_button_file_dialog_chooser_clicked,
 		"search_button_clicked" : search_button_clicked,
 		"save_view_button_clicked" : save_view_button_clicked,
-		"ftp_send_button_clicked" : ftp_send_php_db
+		"ftp_send_button_clicked" : ftp_thread
 	}
 	builder.connect_signals(handler_list)
 	
