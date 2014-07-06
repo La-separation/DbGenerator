@@ -11,7 +11,7 @@ import os
 def import_police_list():
 	"""import police_list from the names of files present in res/police_code"""
 	
-	from global_var import police_list_dir
+	from src.global_var import police_list_dir
 	
 	police_list=[]
 	for elt in os.listdir(police_list_dir):
@@ -23,7 +23,7 @@ def import_police_list():
 def import_police_code_list():
 	"""retrieve police_code_list from the files in res/police_code"""
 	
-	from global_var import police_list, police_list_dir
+	from src.global_var import police_list, police_list_dir
 	
 	#global police_list
 	police_code_list = []
@@ -54,7 +54,7 @@ def import_police_code_list():
 def word_code(word, police, police_code_list):
 	"""generate all possible codes of a word in a police based on police_code_list"""
 	
-	from global_var import police_list
+	from src.global_var import police_list
 	
 	word_codes = [""]
 	police_nb = police_list.index(police)

@@ -4,10 +4,11 @@
 ## import ##
 import sys
 import os
-from word_code import *
+from src.db_generator.word_code import *
 
 ## var ##
-bin_dir_path=os.path.realpath(os.path.dirname(sys.argv[0]))
+#bin_dir_path=os.path.realpath(os.path.dirname(sys.argv[0]))
+bin_dir_path=''
 js_db = "js_db.js"
 php_db = "php_db"
 saved_db = "saved_db.pickle"
