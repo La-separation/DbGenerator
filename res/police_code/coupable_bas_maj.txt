@@ -2,7 +2,7 @@ a:II
 b:O
 c:O,L
 d:O
-e:L
+e:L,O
 f:I
 g:O
 h:II

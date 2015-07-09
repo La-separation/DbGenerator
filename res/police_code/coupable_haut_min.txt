@@ -6,9 +6,9 @@ e:o
 f:f
 g:o
 h:h
-i:i
-j:i
-k:ii,h
+i:1
+j:1
+k:11,h
 l:l
 m:m
 n:o
@@ -18,9 +18,9 @@ q:o
 r:o
 s:o
 t:t
-u:ii
-v:ii
-w:iii
-x:ii
-y:ii
+u:11
+v:11
+w:111
+x:11
+y:11
 z:z
